@@ -1,7 +1,5 @@
 # coding_test
 Webフロントエンドコース：TypeScript(JavaScript)
-
-=======
 ## フェンリル　選考課題【サマーインターンシップ】
 #### 使用言語
   * 使用言語：JavaScript
