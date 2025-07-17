@@ -14,9 +14,11 @@ Webフロントエンドコース：TypeScript(JavaScript)
 * 例１
 * 入力：s="()"
 * 出力：true
+  
 * 例２
 * 入力：s="([]){}"
 * 出力：true
+  
 * 例３
 * 入力：s="({)}"
 * 出力：false
