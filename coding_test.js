@@ -77,7 +77,7 @@ const askInput = () => {
 
         // 入力に全角括弧が含まれていた場合の処理
         if(containsFullWidthBrackets(input)){
-            console.log('⚠ 注意：全角括弧が含まれています');
+            console.log('注意：全角括弧が含まれています');
             console.log('出力：false')
             console.log('入力された括弧の数：',0)
             return askInput();
