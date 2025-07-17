@@ -1,9 +1,37 @@
 // readlineモジュールを読み込んで、ユーザーからの入力を受け取れるようにする
 const readline = require('readline');
 
+// 半角の括弧だけを抽出する関数
+const extractHalfWidthBrackets = (str) => {
+    return str.replace(/[^()\[\]{}]/g, '');
+};
+
+// 全角括弧が含まれているかチェックする関数
+const containsFullWidthBrackets = (str) => {
+    return /[（）｛｝［］]/.test(str);
+};
+
+const countBrackets = (str) => {
+    const counts = { 
+        '(': 0,')':0,
+        '{': 0,'}':0,
+        '[': 0,']':0
+    };
+
+    //文字列中の括弧の種類ごとの個数を数える
+    for(let char of str){
+        if(char in counts){
+            counts[char]++;
+        }
+    }
+    return counts;
+};
+
 
 // 括弧の対応関係が正しいかどうかを判定する関数
 const isValid = (s) => {
+    // 括弧の数が１個以下ならfalse
+    if(s.length <= 1) return false;
     // 括弧の開閉を管理するスタック
     const stack = []; 
     // 開き括弧と閉じ括弧の対応表
@@ -25,7 +53,6 @@ const isValid = (s) => {
             if (parentheses[last] !== char) {
                 return false;
             }
-
         };
     }
     // 最後にスタックが空なら、すべて正しく閉じられている
@@ -48,11 +75,29 @@ const askInput = () => {
             return;
         }
 
+        // 入力に全角括弧が含まれていた場合の処理
+        if(containsFullWidthBrackets(input)){
+            console.log('⚠ 注意：全角括弧が含まれています');
+            console.log('出力：false')
+            console.log('入力された括弧の数：',0)
+            return askInput();
+        }
+
         // 判定を実行して結果を表示
-        const result = isValid(input);
+        const filteredInput = extractHalfWidthBrackets(input);
+        const result = isValid(filteredInput);
+        const counts = countBrackets(filteredInput);
+
         console.log('出力:',result);
-        // 入力された文字数（括弧の数）を表示
-        console.log('入力された括弧の数',input.length);
+        console.log('入力された括弧の数:', filtered.length);
+        // 入力された文字数（種類ごとの括弧の数）を表示
+        console.log('各括弧の入力数');
+        console.log('( の数:', counts['(']);
+        console.log(') の数:', counts[')']);
+        console.log('{ の数:', counts['{']);
+        console.log('} の数:', counts['}']);
+        console.log('[ の数:', counts['[']);
+        console.log('] の数:', counts[']']);
         // 次の入力を促す
         askInput();
     });
