@@ -20,6 +20,3 @@ Webフロントエンドコース：TypeScript(JavaScript)
 *例３
 *入力：s="({)}"
 *出力：false
-
-
->>>>>>> 5a2cc55 (update 括弧判定プログラム(JavaScript))
