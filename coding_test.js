@@ -75,21 +75,29 @@ const askInput = () => {
             return;
         }
 
+        const filteredInput = extractHalfWidthBrackets(input);
+        const counts = countBrackets(filteredInput);
+
         // 入力に全角括弧が含まれていた場合の処理
         if(containsFullWidthBrackets(input)){
-            console.log('注意：全角括弧が含まれています');
-            console.log('出力：false')
-            console.log('入力された括弧の数：',0)
+            console.log('⚠ 注意：全角括弧が含まれています');
+            console.log('出力：false');
+            console.log('入力された括弧(半角)の数:', filteredInput.length);
+            console.log('各括弧の入力数:');
+            console.log('( の数:', counts['(']);
+            console.log(') の数:', counts[')']);
+            console.log('{ の数:', counts['{']);
+            console.log('} の数:', counts['}']);
+            console.log('[ の数:', counts['[']);
+            console.log('] の数:', counts[']']);
             return askInput();
         }
 
         // 判定を実行して結果を表示
-        const filteredInput = extractHalfWidthBrackets(input);
         const result = isValid(filteredInput);
-        const counts = countBrackets(filteredInput);
 
         console.log('出力:',result);
-        console.log('入力された括弧の数:', filtered.length);
+        console.log('入力された括弧(半角)の数:', filteredInput.length);
         // 入力された文字数（種類ごとの括弧の数）を表示
         console.log('各括弧の入力数');
         console.log('( の数:', counts['(']);
